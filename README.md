@@ -8,12 +8,6 @@
 
 ---
 
-## Demo
-
-[![Watch the demo](https://img.youtube.com/vi/YPPJBVOP71M/hqdefault.jpg)](https://youtu.be/YPPJBVOP71M)
-
----
-
 ## Background
 
 Keeping code documentation up to date is one of the most overlooked yet critical parts of software development. Most teams either skip it entirely or let it go stale.
