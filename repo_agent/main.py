@@ -10,7 +10,7 @@ from repo_agent.settings import SettingsManager, LogLevel
 from repo_agent.utils.meta_info_utils import delete_fake_files, make_fake_files
 
 try:
-    version_number = metadata.version("repoagent")
+    version_number = metadata.version("codedocs")
 except metadata.PackageNotFoundError:
     version_number = "0.0.0"
 

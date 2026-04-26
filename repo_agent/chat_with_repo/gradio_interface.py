@@ -126,7 +126,7 @@ class GradioInterface:
     def setup_gradio_interface(self):
         with gr.Blocks() as demo:
             gr.Markdown("""
-                # RepoAgent: Chat with doc
+                # CodeDocs: Chat with doc
             """)
             with gr.Tab("main chat"):
                 with gr.Row():
