@@ -12,7 +12,7 @@
 
 Keeping code documentation up to date is one of the most overlooked yet critical parts of software development. Most teams either skip it entirely or let it go stale.
 
-**CodeDocs** solves this by using Large Language Models (LLMs) to automatically generate, maintain, and update documentation for your Python repositories — directly integrated into your Git workflow.
+**CodeDocs** solves this by using Large Language Models (LLMs) to automatically generate, maintain, and update documentation for your Python repositories directly integrated into your Git workflow.
 
 **Goal: Make accurate, readable documentation effortless for every developer.**
 
@@ -20,13 +20,13 @@ Keeping code documentation up to date is one of the most overlooked yet critical
 
 ## Features
 
-- **Auto-detects Git changes** — tracks file additions, deletions, and modifications automatically
-- **AST-powered code analysis** — independently understands code structure to generate meaningful docs
-- **Bidirectional call tracking** — identifies how objects reference each other for richer documentation
-- **Seamless Markdown updates** — keeps your docs folder in sync with your code at all times
-- **Multi-threaded generation** — concurrent processing for fast documentation at scale
-- **Team-friendly** — integrates with `pre-commit` hooks for automated doc updates on every commit
-- **Beautiful output** — generates structured Markdown docs, compatible with GitBook and similar tools
+- **Auto-detects Git changes**  tracks file additions, deletions, and modifications automatically
+- **AST-powered code analysis**  independently understands code structure to generate meaningful docs
+- **Bidirectional call tracking**  identifies how objects reference each other for richer documentation
+- **Seamless Markdown updates**  keeps your docs folder in sync with your code at all times
+- **Multi-threaded generation**  concurrent processing for fast documentation at scale
+- **Team-friendly**  integrates with `pre-commit` hooks for automated doc updates on every commit
+- **Beautiful output**  generates structured Markdown docs, compatible with GitBook and similar tools
 
 ---
 
@@ -144,7 +144,7 @@ Now every `git commit` will automatically trigger CodeDocs to detect changes and
 
 ## Chat With Repo
 
-CodeDocs includes an experimental **Chat With Repo** feature — an interactive Q&A interface for your codebase.
+CodeDocs includes an experimental **Chat With Repo** feature an interactive Q&A interface for your codebase.
 
 ```sh
 pip install codedocs[chat-with-repo]
