@@ -10,30 +10,30 @@ class GradioInterface:
         self.cssa = """
                 <style>
                         .outer-box {
-                            border: 1px solid #333; /* 外框的边框颜色和大小 */
-                            border-radius: 10px; /* 外框的边框圆角效果 */
-                            padding: 10px; /* 外框的内边距 */
+                            border: 1px solid #333;
+                            border-radius: 10px;
+                            padding: 10px;
                         }
 
                         .title {
-                            margin-bottom: 10px; /* 标题和内框之间的距离 */
+                            margin-bottom: 10px;
                         }
 
                         .inner-box {
-                            border: 1px solid #555; /* 内框的边框颜色和大小 */
-                            border-radius: 5px; /* 内框的边框圆角效果 */
-                            padding: 10px; /* 内框的内边距 */
+                            border: 1px solid #555;
+                            border-radius: 5px;
+                            padding: 10px;
                         }
 
                         .content {
-                            white-space: pre-wrap; /* 保留空白符和换行符 */
-                            font-size: 16px; /* 内容文字大小 */
+                            white-space: pre-wrap;
+                            font-size: 16px;
                             height: 405px;
                             overflow: auto;
                         }
                     </style>
                     <div class="outer-box"">
-        
+
         """
         self.cssb = """
                         </div>
@@ -43,7 +43,7 @@ class GradioInterface:
         self.setup_gradio_interface()
 
     def wrapper_respond(self, msg_input, system_input):
-        # 调用原来的 respond 函数
+        # Call the original respond function
         msg, output1, output2, output3, code, codex = self.respond(
             msg_input, system_input
         )
@@ -95,7 +95,7 @@ class GradioInterface:
                                         <div class="title">Response</div>
                                             <div class="inner-box">
                                                 <div class="content">
-                      
+
                                             """
             + self.cssb
         )
@@ -105,7 +105,7 @@ class GradioInterface:
                                         <div class="title">Embedding Recall</div>
                                             <div class="inner-box">
                                                 <div class="content">
-                                    
+
                                             """
             + self.cssb
         )
@@ -116,7 +116,7 @@ class GradioInterface:
                                         <div class="title">Code</div>
                                             <div class="inner-box">
                                                 <div class="content">
-                                   
+
                                             """
             + self.cssb
         )
@@ -145,20 +145,19 @@ class GradioInterface:
                                         <div class="title">Response</div>
                                             <div class="inner-box">
                                                 <div class="content">
-                      
+
                                             """
                         + self.cssb
                     )
                 with gr.Row():
                     with gr.Column():
-                        # output2 = gr.Textbox(label = "Embedding recall")
                         output2 = gr.HTML(
                             self.cssa
                             + """
                                         <div class="title">Embedding Recall</div>
                                             <div class="inner-box">
                                                 <div class="content">
-                                    
+
                                             """
                             + self.cssb
                         )
@@ -168,7 +167,7 @@ class GradioInterface:
                                         <div class="title">Code</div>
                                             <div class="inner-box">
                                                 <div class="content">
-                                   
+
                                             """
                         + self.cssb
                     )
@@ -195,13 +194,13 @@ class GradioInterface:
         demo.queue().launch(share=False, height=800)
 
 
-# 使用方法
+# Usage example
 if __name__ == "__main__":
 
     def respond_function(msg, system):
         RAG = """
 
-        
+
         """
         return msg, RAG, "Embedding_recall_output", "Key_words_output", "Code_output"
 

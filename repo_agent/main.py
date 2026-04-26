@@ -24,7 +24,7 @@ def cli():
 
 def handle_setting_error(e: ValidationError):
     """Handle configuration errors for settings."""
-    # 输出更详细的字段缺失信息，使用颜色区分
+    # Output detailed field error messages with color
     for error in e.errors():
         field = error["loc"][-1]
         if error["type"] == "missing":
@@ -36,7 +36,7 @@ def handle_setting_error(e: ValidationError):
             message = click.style(error["msg"], fg="yellow")
         click.echo(message, err=True, color=True)
 
-    # 使用 ClickException 优雅地退出程序
+    # Use ClickException to exit gracefully
     raise click.ClickException(
         click.style(
             "Program terminated due to configuration errors.", fg="red", bold=True
@@ -172,7 +172,7 @@ def run(
         handle_setting_error(e)
         return
 
-    # 如果设置成功，则运行任务
+    # If settings are valid, run the task
     runner = Runner()
     runner.run()
     logger.success("Documentation task completed.")
@@ -199,7 +199,7 @@ def diff():
         return
 
     runner = Runner()
-    if runner.meta_info.in_generation_process:  # 如果不是在生成过程中，就开始检测变更
+    if runner.meta_info.in_generation_process:  # Only supports pre-check mode
         click.echo("This command only supports pre-check")
         raise click.Abort()
 

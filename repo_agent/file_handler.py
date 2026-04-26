@@ -1,4 +1,4 @@
-# FileHandler 类，实现对文件的读写操作，这里的文件包括markdown文件和python文件
+# FileHandler class: handles read/write operations for markdown and Python files
 # repo_agent/file_handler.py
 import ast
 import json
@@ -16,11 +16,11 @@ from repo_agent.utils.meta_info_utils import latest_verison_substring
 
 class FileHandler:
     """
-    历变更后的文件的循环中，为每个变更后文件（也就是当前文件）创建一个实例
+    Creates one instance per changed file in the loop that processes changed files.
     """
 
     def __init__(self, repo_path, file_path):
-        self.file_path = file_path  # 这里的file_path是相对于仓库根目录的路径
+        self.file_path = file_path  # file_path is relative to the repository root
         self.repo_path = repo_path
 
         setting = SettingsManager.get_setting()
@@ -77,17 +77,15 @@ class FileHandler:
         ) as code_file:
             lines = code_file.readlines()
             code_content = "".join(lines[start_line - 1 : end_line])
-            # 获取对象名称在第一行代码中的位置
+            # Get the column position of the object name in the first line of code
             name_column = lines[start_line - 1].find(code_name)
-            # 判断代码中是否有return字样
+            # Check whether the code contains a return statement
             if "return" in code_content:
                 have_return = True
             else:
                 have_return = False
 
             code_info["have_return"] = have_return
-            # # 使用 json.dumps 来转义字符串，并去掉首尾的引号
-            # code_info['code_content'] = json.dumps(code_content)[1:-1]
             code_info["code_content"] = code_content
             code_info["name_column"] = name_column
 
@@ -101,9 +99,9 @@ class FileHandler:
             file_path (str): The relative path of the file.
             content (str): The content to be written to the file.
         """
-        # 确保file_path是相对路径
+        # Ensure file_path is a relative path
         if file_path.startswith("/"):
-            # 移除开头的 '/'
+            # Remove leading '/'
             file_path = file_path[1:]
 
         abs_file_path = os.path.join(self.repo_path, file_path)
@@ -150,12 +148,12 @@ class FileHandler:
             int: The end line number of the node. Returns -1 if the node does not have a line number.
         """
         if not hasattr(node, "lineno"):
-            return -1  # 返回-1表示此节点没有行号
+            return -1  # Return -1 to indicate this node has no line number
 
         end_lineno = node.lineno
         for child in ast.iter_child_nodes(node):
             child_end = getattr(child, "end_lineno", None) or self.get_end_lineno(child)
-            if child_end > -1:  # 只更新当子节点有有效行号时
+            if child_end > -1:  # Only update when the child node has a valid line number
                 end_lineno = max(end_lineno, child_end)
         return end_lineno
 
@@ -191,24 +189,12 @@ class FileHandler:
         functions_and_classes = []
         for node in ast.walk(tree):
             if isinstance(node, (ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)):
-                # if node.name == "recursive_check":
-                #     import pdb; pdb.set_trace()
                 start_line = node.lineno
                 end_line = self.get_end_lineno(node)
-                # def get_recursive_parent_name(node):
-                #     now = node
-                #     while "parent" in dir(now):
-                #         if isinstance(now.parent, (ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)):
-                #             assert 'name' in dir(now.parent)
-                #             return now.parent.name
-                #         now = now.parent
-                #     return None
-                # parent_name = get_recursive_parent_name(node)
                 parameters = (
                     [arg.arg for arg in node.args.args] if "args" in dir(node) else []
                 )
                 all_names = [item[1] for item in functions_and_classes]
-                # (parent_name == None or parent_name in all_names) and
                 functions_and_classes.append(
                     (type(node).__name__, node.name, start_line, end_line, parameters)
                 )
@@ -229,14 +215,12 @@ class FileHandler:
             "function_name": {
                 "type": "function",
                 "start_line": 10,
-                ··· ···
                 "end_line": 20,
                 "parent": "class_name"
             },
             "class_name": {
                 "type": "class",
                 "start_line": 5,
-                ··· ···
                 "end_line": 25,
                 "parent": None
             }
@@ -245,7 +229,7 @@ class FileHandler:
         with open(os.path.join(self.repo_path, file_path), "r", encoding="utf-8") as f:
             content = f.read()
             structures = self.get_functions_and_classes(content)
-            file_objects = []  # 以列表的形式存储
+            file_objects = []  # Store as a list
             for struct in structures:
                 structure_type, name, start_line, end_line, params = struct
                 code_info = self.get_obj_code_info(
@@ -256,8 +240,8 @@ class FileHandler:
         return file_objects
 
     def generate_overall_structure(self, file_path_reflections, jump_files) -> dict:
-        """获取目标仓库的文件情况，通过AST-walk获取所有对象等情况。
-        对于jump_files: 不会parse，当做不存在
+        """Get the file layout of the target repo via AST-walk to extract all objects.
+        Files in jump_files are skipped and treated as non-existent.
         """
         repo_structure = {}
         gitignore_checker = GitignoreChecker(
@@ -278,19 +262,6 @@ class FileHandler:
                     f"{Fore.LIGHTYELLOW_EX}[File-Handler] Skip Latest Version, Using Git-Status Version]: {Style.RESET_ALL}{normal_file_names}"
                 )
                 continue
-            # elif not_ignored_files.endswith(latest_version):
-            #     """如果某文件被删除但没有暂存，文件系统有fake_file但没有对应的原始文件"""
-            #     for k,v in file_path_reflections.items():
-            #         if v == not_ignored_files and not os.path.exists(os.path.join(setting.project.target_repo, not_ignored_files)):
-            #             print(f"{Fore.LIGHTYELLOW_EX}[Unstaged DeleteFile] load fake-file-content: {Style.RESET_ALL}{k}")
-            #             normal_file_names = k #原来的名字
-            #             break
-            #     if normal_file_names == not_ignored_files:
-            #         continue
-
-            # if not_ignored_files in file_path_reflections.keys():
-            #     not_ignored_files = file_path_reflections[not_ignored_files] #获取fake_file_path
-            #     print(f"{Fore.LIGHTYELLOW_EX}[Unstaged ChangeFile] load fake-file-content: {Style.RESET_ALL}{normal_file_names}")
 
             try:
                 repo_structure[normal_file_names] = self.generate_file_structure(
@@ -324,7 +295,6 @@ class FileHandler:
             file_path = self.file_path
 
         # Find the file object in json_data that matches file_path
-
         file_dict = json_data.get(file_path)
 
         if file_dict is None:

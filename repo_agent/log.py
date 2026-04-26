@@ -7,34 +7,34 @@ from loguru import logger
 
 logger = logger.opt(colors=True)
 """
-CodeDocs 日志记录器对象。
+CodeDocs logger object.
 
-默认信息:
-- 格式: `[%(asctime)s %(name)s] %(levelname)s: %(message)s`
-- 等级: `INFO` ，根据 `CONFIG["log_level"]` 配置改变
-- 输出: 输出至 stdout
+Defaults:
+- Format: `[%(asctime)s %(name)s] %(levelname)s: %(message)s`
+- Level: `INFO`, changes based on `CONFIG["log_level"]` configuration
+- Output: stdout
 
-用法示例:
+Usage example:
     ```python
     from repo_agent.log import logger
-    
-    # 基本消息记录
-    logger.info("It <green>works</>!") # 使用颜色
 
-    # 记录异常信息
+    # Basic message logging
+    logger.info("It <green>works</>!")  # use colors
+
+    # Log exception info
     try:
         1 / 0
     except ZeroDivisionError:
-        # 使用 `logger.exception` 可以在记录异常消息时自动附加异常的堆栈跟踪信息。
+        # logger.exception automatically attaches the stack trace when logging exceptions
         logger.exception("ZeroDivisionError occurred")
 
-    # 记录调试信息
+    # Log debug info
     logger.debug(f"Debugging info: {some_debug_variable}")
 
-    # 记录警告信息
+    # Log warnings
     logger.warning("This is a warning message")
 
-    # 记录错误信息
+    # Log errors
     logger.error("An error occurred")
     ```
 

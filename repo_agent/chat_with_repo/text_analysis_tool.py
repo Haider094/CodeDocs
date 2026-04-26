@@ -32,9 +32,8 @@ class TextAnalysisTool:
 
     def list_to_markdown(self, search_result):
         markdown_str = ""
-        # 遍历列表，将每个元素转换为Markdown格式的项
+        # Iterate over the list and convert each element to a Markdown list item
         for index, content in enumerate(search_result, start=1):
-            # 添加到Markdown字符串中，每个项后跟一个换行符
             markdown_str += f"{index}. {content}\n\n"
 
         return markdown_str
@@ -51,7 +50,6 @@ The output function name or class name should be only one.
         """
         query = f"{instrcution}\n\nThe input is shown as bellow:\n{message}\n\nAnd now directly give your Output:"
         response = self.llm.complete(query)
-        # logger.debug(f"Input: {message}, Output: {response}")
         return response
 
 

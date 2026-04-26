@@ -41,7 +41,7 @@ class RepoAssistant:
         queries = response.text.split("\n")
         return queries
 
-    def rerank(self, query, docs):  # 这里要防止返回值格式上出问题
+    def rerank(self, query, docs):  # Guard against malformed return value formats
         response = self.weak_model.chat(
             response_format={"type": "json_object"},
             temperature=0,
@@ -65,7 +65,7 @@ class RepoAssistant:
     def list_to_markdown(self, list_items):
         markdown_content = ""
 
-        # 对于列表中的每个项目，添加一个带数字的列表项
+        # Add a numbered list item for each element in the list
         for index, item in enumerate(list_items, start=1):
             markdown_content += f"{index}. {item}\n"
 
