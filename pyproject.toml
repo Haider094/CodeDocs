@@ -45,10 +45,9 @@ build-backend = "pdm.backend"
 reportCallIssue="none"
 
 [tool.ruff]
-# General ruff settings can stay here.
 
 [tool.ruff.lint]
-select = ["I001"] 
+select = ["I001"]
 
 [tool.pdm]
 [tool.pdm.dev-dependencies]

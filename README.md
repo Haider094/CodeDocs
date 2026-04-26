@@ -1,5 +1,5 @@
 <h1 align="center">
-  🤖 CodeDocs — Automatic Code Documentation, Powered by LLMs
+  CodeDocs — Automatic Code Documentation, Powered by LLMs
 </h1>
 
 <p align="center">
@@ -8,35 +8,35 @@
 
 ---
 
-## 🎬 Demo
+## Demo
 
 [![Watch the demo](https://img.youtube.com/vi/YPPJBVOP71M/hqdefault.jpg)](https://youtu.be/YPPJBVOP71M)
 
 ---
 
-## 👾 Background
+## Background
 
 Keeping code documentation up to date is one of the most overlooked yet critical parts of software development. Most teams either skip it entirely or let it go stale.
 
 **CodeDocs** solves this by using Large Language Models (LLMs) to automatically generate, maintain, and update documentation for your Python repositories — directly integrated into your Git workflow.
 
-**🏆 Goal: Make accurate, readable documentation effortless for every developer.**
+**Goal: Make accurate, readable documentation effortless for every developer.**
 
 ---
 
-## ✨ Features
+## Features
 
-- **🤖 Auto-detects Git changes** — tracks file additions, deletions, and modifications automatically
-- **📝 AST-powered code analysis** — independently understands code structure to generate meaningful docs
-- **🔍 Bidirectional call tracking** — identifies how objects reference each other for richer documentation
-- **📚 Seamless Markdown updates** — keeps your docs folder in sync with your code at all times
-- **🕙 Multi-threaded generation** — concurrent processing for fast documentation at scale
-- **👭 Team-friendly** — integrates with `pre-commit` hooks for automated doc updates on every commit
-- **😍 Beautiful output** — generates structured Markdown docs, compatible with GitBook and similar tools
+- **Auto-detects Git changes** — tracks file additions, deletions, and modifications automatically
+- **AST-powered code analysis** — independently understands code structure to generate meaningful docs
+- **Bidirectional call tracking** — identifies how objects reference each other for richer documentation
+- **Seamless Markdown updates** — keeps your docs folder in sync with your code at all times
+- **Multi-threaded generation** — concurrent processing for fast documentation at scale
+- **Team-friendly** — integrates with `pre-commit` hooks for automated doc updates on every commit
+- **Beautiful output** — generates structured Markdown docs, compatible with GitBook and similar tools
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Installation
 
@@ -53,7 +53,7 @@ pip install codedocs
 
 ```bash
 git clone https://github.com/Haider094/CodeDocs.git
-cd codedocs
+cd CodeDocs
 ```
 
 3. Set up the virtual environment:
@@ -77,7 +77,7 @@ $Env:OPENAI_API_KEY = "YOUR_API_KEY"        # Windows (PowerShell)
 
 ---
 
-## ▶️ Running CodeDocs
+## Running CodeDocs
 
 ```sh
 codedocs run                    # Generate or update documentation
@@ -108,7 +108,7 @@ codedocs diff    # Preview which docs will be updated based on current code chan
 
 ---
 
-## 🔗 Pre-commit Hook Integration
+## Pre-commit Hook Integration
 
 Integrate CodeDocs into your Git workflow so docs update automatically on every commit.
 
@@ -144,17 +144,11 @@ repos:
 pre-commit install
 ```
 
-Now every `git commit` will automatically trigger CodeDocs to detect changes and update docs. Your normal workflow stays the same:
-
-```sh
-git add .
-git commit -m "your message"
-git push
-```
+Now every `git commit` will automatically trigger CodeDocs to detect changes and update docs.
 
 ---
 
-## 💬 Chat With Repo
+## Chat With Repo
 
 CodeDocs includes an experimental **Chat With Repo** feature — an interactive Q&A interface for your codebase.
 
@@ -165,7 +159,7 @@ codedocs chat-with-repo
 
 ---
 
-## ✅ Roadmap
+## Roadmap
 
 - [ ] Auto-generate `README.md` from project documentation
 - [ ] Multi-language support (Java, C, C++, etc.)
@@ -173,7 +167,7 @@ codedocs chat-with-repo
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
